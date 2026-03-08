@@ -38,6 +38,11 @@ require('jujutsu.nvim').setup {
   -- Use the jj root as the cwd
   use_vcs_root = true,
 
+  -- Auto-close the float when the process exits.
+  -- Set to false for non-interactive commands like { "jj", "log" }
+  -- so the buffer stays open until you press the close mapping.
+  auto_close = true,
+
   floating = {
     width = 0.8, -- fraction of editor width
     height = 0.8, -- fraction of editor height
