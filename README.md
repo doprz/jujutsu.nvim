@@ -2,6 +2,8 @@
 
 A Neovim plugin for jujutsu integration. Inspired by lazygit.nvim
 
+![jujutsu.nvim example](./jujutsu-nvim.png) 
+
 ## Installation
 
 lazy.nvim
