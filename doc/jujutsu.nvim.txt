@@ -1,0 +1,111 @@
+*jujutsu.nvim.txt
+
+==============================================================================
+Table of Contents                             *jujutsu.nvim-table-of-contents*
+
+1. jujutsu.nvim                                    |jujutsu.nvim-jujutsu.nvim|
+2. INTRODUCTION                                    |jujutsu.nvim-introduction|
+3. REQUIREMENTS                                    |jujutsu.nvim-requirements|
+4. SETUP                                                  |jujutsu.nvim-setup|
+5. CONFIGURATION                                  |jujutsu.nvim-configuration|
+6. KEYMAPS                                              |jujutsu.nvim-keymaps|
+7. API                                                      |jujutsu.nvim-api|
+
+==============================================================================
+1. jujutsu.nvim                                    *jujutsu.nvim-jujutsu.nvim*
+
+A Neovim plugin for jujutsu integration. Inspired by lazygit.nvim
+
+Author: doprz
+License: MIT
+Homepage: https://github.com/doprz/jujutsu.nvim
+
+
+==============================================================================
+2. INTRODUCTION                                    *jujutsu.nvim-introduction*
+
+jujutsu.nvim opens your favorite Jujutsu TUI (jjui, lazyjj, …) in a floating
+terminal window, similar to how lazygit.nvim works for git.
+
+
+==============================================================================
+3. REQUIREMENTS                                    *jujutsu.nvim-requirements*
+
+- Neovim 0.11+
+- Jujutsu
+- JJ TUI (Optional but recommended)
+
+
+==============================================================================
+4. SETUP                                                  *jujutsu.nvim-setup*
+
+Call `setup()` in your Neovim config, e.g. inside your lazy.nvim spec:
+
+>lua
+    {
+      'doprz/jujutsu.nvim',
+      config = function()
+        require('jujutsu').setup { }
+      end,
+    }
+<
+
+`setup()` can be called with no arguments. `jujutsu.nvim` comes with sensible
+defaults.
+
+
+==============================================================================
+5. CONFIGURATION                                  *jujutsu.nvim-configuration*
+
+>lua
+    require('jujutsu.nvim').setup {
+      -- Command to run. Good options:
+      --   "jjui"
+      --   "lazyjj"
+      --   { "jj", "log" }
+      cmd = "jjui",
+    
+      -- Use the jj root as the cwd
+      use_vcs_root = true,
+    
+      -- Auto-close the float when the process exits.
+      -- Set to false for non-interactive commands like { "jj", "log" }
+      -- so the buffer stays open until you press the close mapping.
+      auto_close = true,
+    
+      floating = {
+        width = 0.8, -- fraction of editor width
+        height = 0.8, -- fraction of editor height
+        border = "rounded",
+        title = " Jujutsu ",
+        title_pos = "center",
+        -- Set to a highlight group for the border, e.g. "FloatBorder"
+        winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
+      },
+    
+      mappings = {
+        toggle = "<leader>jj",
+        close = "<C-q>",
+      },
+    }
+<
+
+
+==============================================================================
+6. KEYMAPS                                              *jujutsu.nvim-keymaps*
+
+Default keymaps registered by `setup()`:
+
+  Mode       Key   Action
+  ---------- ----- ------------------------------
+  Normal     jj    Toggle the floating terminal
+  Terminal   <C-q> Close the floating terminal
+
+==============================================================================
+7. API                                                      *jujutsu.nvim-api*
+
+- `M.open()` - Open the floating terminal
+- `M.close()` - Close the floating terminal
+- `M.toggle()` - Toggle the floating terminal
+
+vim:tw=78:cc=78:ts=8:noet:ft=help:norl:
