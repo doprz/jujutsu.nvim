@@ -167,6 +167,16 @@ function M.setup(opts)
       silent = true,
     })
   end
+
+  -- Recompute the floating window size when Neovim is resized
+  vim.api.nvim_create_autocmd("VimResized", {
+    group = vim.api.nvim_create_augroup("JujutsuNvimResize", { clear = true }),
+    callback = function()
+      if state.win and vim.api.nvim_win_is_valid(state.win) then
+        vim.api.nvim_win_set_config(state.win, build_win_config())
+      end
+    end,
+  })
 end
 
 return M
