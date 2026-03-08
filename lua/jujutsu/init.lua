@@ -94,6 +94,13 @@ function M.open()
     return
   end
 
+  -- Return early and notify user via statusline if not in a jj repo
+  local vcs_root = find_vcs_root()
+  if not vcs_root and config.use_vcs_root then
+    vim.notify("jujutsu.nvim: not inside a jj repo", vim.log.levels.WARN)
+    return
+  end
+
   -- Resolve cwd
   local cwd = nil
   if config.use_vcs_root then
