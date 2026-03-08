@@ -14,6 +14,11 @@ local defaults = {
   -- Use the jj root as the cwd
   use_vcs_root = true,
 
+  -- Auto-close the float when the process exits.
+  -- Set to false for non-interactive commands like { "jj", "log" }
+  -- so the buffer stays open until you press the close mapping.
+  auto_close = true,
+
   floating = {
     width = 0.8, -- fraction of editor width
     height = 0.8, -- fraction of editor height
@@ -132,10 +137,12 @@ function M.open()
     cwd = cwd,
     term = true,
     on_exit = function(_job_id, _exit_code, _event_type)
-      -- Small defer so the cmd has a chance to fully repaint
-      vim.defer_fn(function()
-        cleanup()
-      end, 10)
+      if config.auto_close then
+        -- Small defer so the cmd has a chance to fully repaint
+        vim.defer_fn(function()
+          cleanup()
+        end, 10)
+      end
     end,
   })
 
