@@ -116,16 +116,15 @@ function M.open()
   state.buf = buf
   state.win = win
 
-  -- cmd config
+  -- If cmd is a table it is passed directly (no shell); if it's a string
+  -- jobstart() runs it in the shell like this: call jobstart(split(&shell) + split(&shellcmdflag) + ['{cmd}'])
   local cmd = config.cmd
-  if type(cmd) == "table" then
-    cmd = table.concat(cmd, " ")
-  end
 
   -- Open the neovim terminal
-  vim.fn.termopen(cmd, {
+  vim.fn.jobstart(cmd, {
     cwd = cwd,
-    on_exit = function(_, exit_code, _)
+    term = true,
+    on_exit = function(_job_id, _exit_code, _event_type)
       -- Small defer so the cmd has a chance to fully repaint
       vim.defer_fn(function()
         cleanup()
