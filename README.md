@@ -8,16 +8,16 @@ lazy.nvim
 
 ```lua
 {
-    'doprz/jujutsu.nvim',
-    config = function()
-        require('jujutsu').setup {
-            cmd = 'jjui',
-            mappings = {
-                toggle = '<leader>jj',
-                close = '<C-q>',
-            },
-        }
-    end,
+  'doprz/jujutsu.nvim',
+  config = function()
+    require('jujutsu').setup {
+      cmd = 'jjui',
+      mappings = {
+        toggle = '<leader>jj',
+        close = '<C-q>',
+      },
+    }
+  end,
 }
 ```
 
