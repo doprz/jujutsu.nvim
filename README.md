@@ -2,7 +2,13 @@
 
 A Neovim plugin for jujutsu integration. Inspired by lazygit.nvim
 
-![jujutsu.nvim example](./jujutsu-nvim.png) 
+![jujutsu.nvim example](./jujutsu-nvim.png)
+
+## Requirements
+
+- Neovim 0.11+
+- Jujutsu
+- JJ TUI (Optional but recommended)
 
 ## Installation
 
